@@ -1,0 +1,40 @@
+<html ng-app="list">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+    .color0 {
+        color: black;
+    }
+	.color1 {
+        color: black;
+    }
+	.color2 {
+        color: red;
+    }
+</style>
+</head>
+<body ng-controller="listController">
+Type something to add in the list
+<form name="listform" ng-submit="addtolist()">
+     <input type="text" name="newitem" ng-model="newitem" required />
+     <button ng-disabled="listform.$invalid" ng-click="addtolist()">Add</button>
+</form>
+  
+<ul>
+<li ng-repeat="item in listarray" ng-class="'color'+($index%3)">
+<span>{{item.nitem}}</span>
+</li>
+</ul>
+  
+</body>
+<script>
+var listapp = angular.module('list', [])
+listapp.controller('listController', function($scope) {
+		$scope.listarray = [];
+		$scope.addtolist = function() {
+		$scope.listarray.push({'nitem': $scope.newitem})
+		$scope.newitem = ''
+		}
+	})
+</script>
+</html>
